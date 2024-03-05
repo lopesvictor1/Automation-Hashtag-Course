@@ -10,41 +10,38 @@ df = pd.read_csv("products.csv")
 
 link = "https://dlp.hashtagtreinamentos.com/python/intensivao/login"
 
-#pressionar o botão do Windows
+#press Windows Button
 pyautogui.press("win")
-#escrever chrome
+#eSearch for Chrome
 pyautogui.write("chrome")
-#pressionar o botão Enter
+#press Enter
 pyautogui.press("enter")
 
-#margem de segurança para dar tempo de abrir o chrome
+#safety margin to ensure that Chrome has load
 time.sleep(1.5)
 
-#escrever o link e apertar o enter para entrar no site
+#Write link and then press enter
 pyautogui.write(link)
 pyautogui.press("enter")
 
-#margem de segurança para dar tempo de carregar o site
+#safety margin to ensure the new page has load
 time.sleep(2.5)
 
-#clicar no campo de email
+#click the first input field
 pyautogui.click(x=763, y=369)
-#escrever o email (nesse caso pode ser qualquer coisa)
+#write the email (can be anything in this site)
 pyautogui.write("estorodefacao@mail.com")
-#mudar para o campo da senha
+#select next field
 pyautogui.press("tab")
-#digitar a senha (nesse caso pode ser qualquer coisa)
+#write the password (can be anything in this site)
 pyautogui.write("estoro123")
-#apertar enter para ir para enviar o formulario
+#press enter to send the form
 pyautogui.press("enter")
 
-#margem de segurança para carregar a próxima página
+#safety margin to ensure that Chrome has load
 time.sleep(2.5)
 
-
-
 for line in df.index:
-    
     #select the first input field
     pyautogui.click(x=787, y=254)
 
@@ -54,7 +51,6 @@ for line in df.index:
     pyautogui.press("tab")
     
     
-
     #write the product brand
     pyautogui.write(df.loc[line, "brand"])
     pyautogui.press("tab")
@@ -79,13 +75,16 @@ for line in df.index:
     pyautogui.write(str(df.loc[line, "cost"]))
     pyautogui.press("tab")
 
+
+    #check if the current line has anything written in the Obs field
     obs = df.loc[line, "obs"]
-    if not pd.isna(obs) :
+    if not pd.isna(obs):
         #write the product observation
         pyautogui.write(obs)
-        pyautogui.press("tab")
-    else:
-        pyautogui.press("tab")
+    
+    pyautogui.press("tab")
+
+        
     #send form
     pyautogui.press("enter")
     #safety margin to ensure the new page has load
